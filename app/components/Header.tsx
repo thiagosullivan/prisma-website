@@ -10,11 +10,11 @@ const Header = () => {
         <header>
             <div className="bg-prisma-blue py-3 px-4">
                 <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-                    <div className="flex gap-x-2 hover:brightness-75">
+                    <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
                         <FaWhatsapp className="text-xl"/>
                         <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="text-sm">(43) 84817211</Link>
                     </div>
-                    <div className="flex gap-x-2 hover:brightness-75">
+                    <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
                         <IoMdMail className="text-xl"/>
                         <Link href="/" className="text-sm">contato@email.com</Link>
                     </div>
