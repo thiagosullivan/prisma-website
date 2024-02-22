@@ -14,6 +14,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    colors: {
+      'prisma-blue': '#011935',
+      'prisma-gray': '#F4F5F7',
+      'prisma-orange': '#F26223',
+    },
   },
   plugins: [],
 };
