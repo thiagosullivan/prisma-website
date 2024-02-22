@@ -12,7 +12,7 @@ const Header = () => {
                 <div className="max-w-screen-xl mx-auto flex items-center justify-between">
                     <div className="flex gap-x-2 hover:brightness-75">
                         <FaWhatsapp className="text-xl"/>
-                        <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="text-sm">(43) 99999-9999</Link>
+                        <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="text-sm">(43) 84817211</Link>
                     </div>
                     <div className="flex gap-x-2 hover:brightness-75">
                         <IoMdMail className="text-xl"/>
