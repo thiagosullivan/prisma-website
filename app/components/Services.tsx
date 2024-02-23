@@ -3,7 +3,7 @@ import ServicesImg from '@/public/services.jpg'
 
 const Services = () => {
     return (
-        <section className="max-w-screen-xl mx-auto px-4 text-prisma-blue mt-10">
+        <section className="max-w-screen-xl mx-auto px-4 text-prisma-blue mt-10" id="servicos">
             <div>
                 <div className="flex flex-col items-center">
                     <h2 className="text-center text-sm text-prisma-orange">Nossos Serviços</h2>

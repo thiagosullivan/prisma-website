@@ -4,7 +4,7 @@ import { IoIosPin, IoMdMail } from "react-icons/io";
 
 const Contact = () => {
     return (
-        <section className="bg-prisma-blue mt-24">
+        <section className="bg-prisma-blue mt-24" id="contato">
             <div className="max-w-screen-xl mx-auto px-4 py-24 flex justify-around">
                 <div className="flex flex-col items-center gap-y-2 text-center">
                     <IoIosPin className="text-8xl text-[#AAAAAA]"/>
@@ -27,8 +27,8 @@ const Contact = () => {
                     <IoMdMail className="text-8xl text-[#AAAAAA]"/>
                     <div className="flex flex-col gap-y-2">
                         <h4 className="font-semibold text-2xl text-[#FFFFFF]">Entre em Contato</h4>                        
-                        <Link className="text-[#AAAAAA]" href="/">contato@email.com</Link>
-                        <Link className="text-[#AAAAAA]" href="/">(43) 98888-7777</Link>
+                        <Link className="text-[#AAAAAA]" href="mailto:email@provedor.com.br" rel="noopener noreferrer" target="_blank">contato@email.com</Link>
+                        <Link className="text-[#AAAAAA]" href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank">(43) 98888-7777</Link>
                         <Link href="/" className="text-prisma-orange hover:text-prisma-orange-hover">Contate</Link>
                     </div>
                 </div>

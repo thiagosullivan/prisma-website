@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className="shadownew">
             <div className="max-w-screen-xl mx-auto px-4 py-14 flex justify-between">
                 <div className="max-w-[300px]">
                     <Link href="/">
@@ -33,19 +33,19 @@ const Footer = () => {
                             <Link className="hover:text-prisma-orange-hover duration-100" href="/">Home</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-prisma-orange-hover duration-100" href="/">Sobre</Link>
+                            <Link className="hover:text-prisma-orange-hover duration-100" href="/sobre">Sobre</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-prisma-orange-hover duration-100" href="/">Serviços</Link>
+                            <Link className="hover:text-prisma-orange-hover duration-100" href="/#servicos">Serviços</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-prisma-orange-hover duration-100" href="/">Time</Link>
+                            <Link className="hover:text-prisma-orange-hover duration-100" href="/#time">Time</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-prisma-orange-hover duration-100" href="/">Produtos</Link>
+                            <Link className="hover:text-prisma-orange-hover duration-100" href="/produtos">Produtos</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-prisma-orange-hover duration-100" href="/">Contato</Link>
+                            <Link className="hover:text-prisma-orange-hover duration-100" href="/#contato">Contato</Link>
                         </li>
                     </ul>
                 </nav>

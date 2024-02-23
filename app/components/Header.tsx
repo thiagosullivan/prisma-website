@@ -16,7 +16,7 @@ const Header = () => {
                     </div>
                     <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
                         <IoMdMail className="text-xl"/>
-                        <Link href="/" className="text-sm">contato@email.com</Link>
+                        <Link href="mailto:email@provedor.com.br" rel="noopener noreferrer" target="_blank" className="text-sm">contato@email.com</Link>
                     </div>
                 </div>                
             </div>
@@ -29,10 +29,10 @@ const Header = () => {
                     <nav>
                         <ul className="flex gap-x-12 text-prisma-blue font-semibold text-base">
                             <li><Link href="/" className="hover:text-prisma-orange duration-100">Home</Link></li>
-                            <li><Link href="/" className="hover:text-prisma-orange duration-100">Sobre</Link></li>
-                            <li><Link href="/" className="hover:text-prisma-orange duration-100">Serviços</Link></li>
-                            <li><Link href="/" className="hover:text-prisma-orange duration-100">Produtos</Link></li>
-                            <li><Link href="/" className="hover:text-prisma-orange duration-100">Contato</Link></li>
+                            <li><Link href="/sobre" className="hover:text-prisma-orange duration-100">Sobre</Link></li>
+                            <li><Link href="/#servicos" className="hover:text-prisma-orange duration-100">Serviços</Link></li>
+                            <li><Link href="/produtos" className="hover:text-prisma-orange duration-100">Produtos</Link></li>
+                            <li><Link href="/#contato" className="hover:text-prisma-orange duration-100">Contato</Link></li>
                         </ul>
                     </nav>
                     <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="bg-prisma-orange text-[#FFFFFF] text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100">Fale Conosco</Link>
