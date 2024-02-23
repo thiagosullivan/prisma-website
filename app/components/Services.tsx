@@ -7,7 +7,7 @@ const Services = () => {
             <div>
                 <div className="flex flex-col items-center">
                     <h2 className="text-center text-sm text-prisma-orange">Nossos Serviços</h2>
-                    <p className="text-center text-5xl mt-5">Serviços que ofereceço <br/> com o selo <span className="text-prisma-orange font-semibold">Prisma</span> de qualidade</p>
+                    <p className="text-center text-5xl mt-5">Serviços que oferecemos <br/> com o selo <span className="text-prisma-orange font-semibold">Prisma</span> de qualidade</p>
                 </div>
                 <div className="grid grid-cols-3 gap-x-3 gap-y-8 justify-items-center mt-24">
                     <div className="max-w-[360px]">
