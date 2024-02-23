@@ -27,26 +27,28 @@ const data = [
 const Produtos = () => {
     return (
         <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col items-center mainnew mb-10">
-            <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-8">
-                Os produtos da <span className="text-prisma-orange">Prisma</span>
-            </h1>
-            <p className="text-prisma-blue text-lg text-center">
-                A nossa lista de produtos de alta qualidade que oferecemos para você!
-            </p>
+            <div className="mt-24">
+                <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-8">
+                    Os produtos da <span className="text-prisma-orange">Prisma</span>
+                </h1>
+                <p className="text-prisma-blue text-lg text-center">
+                    A nossa lista de produtos de alta qualidade que oferecemos para você!
+                </p>
 
-            <div className="grid grid-cols-2 gap-6 mt-14">
-                {data.map((product, index) => {
-                    return (
-                        <div key={index} className="border border-prisma-blue rounded-md overflow-hidden flex items-center p-4">
-                            <Image className="" src={product.img} alt={product.title} width={250} height={250}/>
-                            <div className="flex flex-col border-l border-prisma-blue pl-6">
-                                <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
-                                <p className="text-sm text-justify mb-8">{product.description}</p>
-                                <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="bg-prisma-orange m-auto text-[#FFFFFF] px-6 py-3 hover:bg-prisma-orange-hover inline-block">Compre Agora</Link>
+                <div className="grid grid-cols-2 gap-6 mt-14">
+                    {data.map((product, index) => {
+                        return (
+                            <div key={index} className="border border-prisma-blue rounded-md overflow-hidden flex items-center p-4">
+                                <Image className="" src={product.img} alt={product.title} width={250} height={250}/>
+                                <div className="flex flex-col border-l border-prisma-blue pl-6">
+                                    <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
+                                    <p className="text-sm text-justify mb-8">{product.description}</p>
+                                    <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="bg-prisma-orange m-auto text-[#FFFFFF] px-6 py-3 hover:bg-prisma-orange-hover inline-block">Compre Agora</Link>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
         </main>
     );
