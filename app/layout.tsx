@@ -7,8 +7,8 @@ import Footer from "./components/Footer";
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Prisma Revestimentos",
-  description: "Prisma Revestimentos",
+  title: "Prisma - Acessórios para Construção",
+  description: "Prisma - Acessórios para Construção",
 };
 
 export default function RootLayout({
