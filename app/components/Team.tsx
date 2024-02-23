@@ -10,7 +10,7 @@ import TeamImg from '@/public/team-img.jpg'
   
 const Team = () => {
     return (
-        <section className="bg-prisma-blue">
+        <section className="bg-prisma-blue mt-24">
             <div className="max-w-screen-xl mx-auto px-4 py-24 flex justify-between">
                 <div className="text-[#FFFFFF] max-w-[400px]">
                     <h2 className="text-5xl font-semibold">O nosso time de profissionais</h2>
@@ -43,7 +43,6 @@ const Team = () => {
                         <CarouselPrevious />
                         <CarouselNext />
                     </Carousel>
-
                 </div>
             </div>
         </section>

@@ -31,6 +31,7 @@ const Header = () => {
                             <li><Link href="/" className="hover:text-prisma-orange duration-100">Home</Link></li>
                             <li><Link href="/" className="hover:text-prisma-orange duration-100">Sobre</Link></li>
                             <li><Link href="/" className="hover:text-prisma-orange duration-100">Serviços</Link></li>
+                            <li><Link href="/" className="hover:text-prisma-orange duration-100">Produtos</Link></li>
                             <li><Link href="/" className="hover:text-prisma-orange duration-100">Contato</Link></li>
                         </ul>
                     </nav>
