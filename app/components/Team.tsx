@@ -14,7 +14,7 @@ const Team = () => {
             <div className="max-w-screen-xl mx-auto px-4 py-24 flex justify-between">
                 <div className="text-[#FFFFFF] max-w-[400px]">
                     <h2 className="text-5xl font-semibold">O nosso time de profissionais</h2>
-                    <p className="mt-8">Conheça o nosso time de profissionais especializados que atenderão à sua demanda</p>
+                    <p className="mt-8">Conheça o nossos profissionais especializados que atenderão à sua demanda</p>
                 </div>
                 <div className="flex w-3/5">
                     <Carousel>

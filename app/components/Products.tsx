@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ProductImg from '@/public/services.jpg'
+import Link from "next/link";
 
 const data = [
     {
@@ -31,7 +32,7 @@ const Products = () => {
             <div>
                 <div className="flex flex-col items-center">
                     <h2 className="text-center text-sm text-prisma-orange">Nossos Produtos</h2>
-                    <p className="text-center text-5xl mt-5">We provide all of your <br/> industrial solution</p>
+                    <p className="text-center text-5xl mt-5">Oferecemos uma variedade de produtos <br/> de alta qualidade</p>
                 </div>
                 {/* <div className="mt-24 flex items-center max-w-[700px] gap-x-7">
                     <Image src={ProductImg} alt="Produtos" width={300} height={260} className="rounded-md"/>
@@ -54,6 +55,7 @@ const Products = () => {
                     })}
                 </div>
             </div>
+            <Link href="/produtos" className="bg-prisma-orange text-center mt-14 max-w-[200px] w-full flex justify-center m-auto p-4 text-[#FFFFFF] hover:bg-prisma-orange-hover">Confira mais produtos</Link>
         </section>
     );
 }
