@@ -21,7 +21,7 @@ const Header = () => {
                 </div>                
             </div>
             <div>
-            <div className="bg-prisma-gray py-5 px-4">
+            <div className="bg-prisma-gray py-5 px-4 shadownew">
                 <div className="max-w-screen-xl mx-auto flex items-center justify-between">
                     <Link href="/">
                         <Image src={PrismaLogo} alt="Prisma Logo" width={200} height={50}/>
