@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
 import PrismaLogo from "@/public/prisma-logo-small.png";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa6";
 
 const Header = () => {
     return (
@@ -78,6 +79,29 @@ const Header = () => {
                         </li>
                         </ul>
                         <Link href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank" className="bg-prisma-orange text-[#FFFFFF] text-center text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100 m-auto block">Fale Conosco</Link>
+                        <div className="flex gap-x-6 justify-center mt-12">
+                            <Link
+                                href="https://www.facebook.com/"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                <FaFacebookSquare className="text-3xl hover:text-prisma-orange-hover duration-100" />
+                            </Link>
+                            <Link
+                                href="https://www.instagram.com/revestimentoprisma/"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                <FaInstagram className="text-3xl hover:text-prisma-orange-hover duration-100" />
+                            </Link>
+                            <Link
+                                href="https://www.linkedin.com/"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                <FaLinkedin className="text-3xl hover:text-prisma-orange-hover duration-100" />
+                            </Link>
+                        </div>
                     </SheetContent>
                 </Sheet>
             </div>
