@@ -9,7 +9,7 @@ import { Menu } from "lucide-react";
 
 const Header = () => {
     return (
-        <header className="max-lg:fixed w-full bg-prisma-gray z-50">
+        <header className="max-md:fixed w-full bg-prisma-gray z-50">
             <div className="bg-prisma-blue py-3 px-4">
                 <div className="max-w-screen-xl mx-auto flex items-center justify-between">
                     <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">

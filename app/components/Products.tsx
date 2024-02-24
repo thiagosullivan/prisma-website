@@ -31,22 +31,25 @@ const Products = () => {
         <section className="max-w-screen-xl mx-auto px-4 text-prisma-blue mt-10">
             <div>
                 <div className="flex flex-col items-center">
-                    <h2 className="text-center text-sm text-prisma-orange">Nossos Produtos</h2>
-                    <p className="text-center text-5xl mt-5">Oferecemos uma variedade de produtos <br/> de alta qualidade</p>
+                    <h2 className="text-center text-sm text-prisma-orange max-lg:text-2xl">Nossos Produtos</h2>
+                    <p className="text-center text-5xl mt-5 max-lg:text-3xl mx-lg:mb-6">Oferecemos uma variedade de produtos <br/> de alta qualidade</p>
                 </div>
-                {/* <div className="mt-24 flex items-center max-w-[700px] gap-x-7">
-                    <Image src={ProductImg} alt="Produtos" width={300} height={260} className="rounded-md"/>
-                    <div>
-                        <h4 className="font-semibold text-2xl text-prisma-blue">Industrial construction</h4>
-                        <p className="mt-5 text-prisma-blue">Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.</p>
-                    </div>
-                </div> */}
-                <div className="grid grid-cols-2 gap-x-3 gap-y-8 justify-items-center">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-8 justify-items-center max-lg:grid-cols-1">
                     {data.map((product, index) => {
                         return (
-                            <div key={index} className="mt-24 flex items-center max-w-[700px] gap-x-7">
-                                <Image src={ProductImg} alt="Produtos" width={300} height={260} className="rounded-md"/>
-                                <div>
+                            <div key={index} className="mt-24 flex items-center max-w-[700px] w-full gap-x-7 max-sm:flex-col max-sm:mt-6">
+                                <div className="h-[260px] w-full relative max-sm:mb-6">
+                                    <Image
+                                        src={ProductImg}
+                                        alt="Produtos"
+                                        fill
+                                        className="h-[260px] w-full rounded-md"
+                                        style={{
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                </div>
+                                <div className="max-w-[300px] max-sm:max-w-none">
                                     <h4 className="font-semibold text-2xl text-prisma-blue">Industrial construction</h4>
                                     <p className="mt-5 text-prisma-blue">Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.</p>
                                 </div>
