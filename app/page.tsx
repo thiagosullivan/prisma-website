@@ -6,6 +6,7 @@ import Services from "./components/Services";
 import Team from "./components/Team";
 import Products from "./components/Products";
 import Contact from "./components/Contact";
+import Phrase from "./components/Phrase";
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       <Hero />
       <Brands />
       <Services />
-      <Team />
+      {/* <Team /> */}
+      <Phrase />
       <Products />
       <Contact />
     </main>

@@ -19,7 +19,7 @@ const Header = () => {
                     </div>
                     <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
                         <IoMdMail className="text-xl"/>
-                        <Link href="mailto:email@provedor.com.br" rel="noopener noreferrer" target="_blank" className="text-sm">contato@email.com</Link>
+                        <Link href="mailto:revestimentoprisma@gmail.com " rel="noopener noreferrer" target="_blank" className="text-sm">revestimentoprisma@gmail.com </Link>
                     </div>
                 </div>                
             </div>

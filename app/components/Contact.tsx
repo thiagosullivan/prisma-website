@@ -19,7 +19,8 @@ const Contact = () => {
                     <BsClockFill className="text-8xl max-md:text-4xl text-[#AAAAAA]"/>
                     <div className="flex flex-col gap-y-2">
                         <h4 className="font-semibold text-2xl max-md:text-xl text-[#FFFFFF]">Horário de Atendimento</h4>
-                        <p className="text-[#AAAAAA]">Seg-Sex (8:00 - 18:00) <br/>
+                        <p className="text-[#AAAAAA]">Seg-Qui (8:00 - 18:00) <br/>
+                        Sexta (8:00 - 17:00) <br/>
                         Sab-Dom <span className="text-prisma-orange">(Fechado)</span></p>
                     </div>
                 </div>
@@ -27,8 +28,8 @@ const Contact = () => {
                     <IoMdMail className="text-8xl max-md:text-4xl text-[#AAAAAA]"/>
                     <div className="flex flex-col gap-y-2">
                         <h4 className="font-semibold text-2xl max-md:text-xl text-[#FFFFFF]">Entre em Contato</h4>                        
-                        <Link className="text-[#AAAAAA]" href="mailto:email@provedor.com.br" rel="noopener noreferrer" target="_blank">contato@email.com</Link>
-                        <Link className="text-[#AAAAAA]" href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank">(43) 98888-7777</Link>
+                        <Link className="text-[#AAAAAA]" href="mailto:revestimentoprisma@gmail.com" rel="noopener noreferrer" target="_blank">revestimentoprisma@gmail.com</Link>
+                        <Link className="text-[#AAAAAA]" href="https://wa.me/554384817211" rel="noopener noreferrer" target="_blank">(43) 8481-7211</Link>
                         <Link href="/" className="text-prisma-orange hover:text-prisma-orange-hover">Contate</Link>
                     </div>
                 </div>
