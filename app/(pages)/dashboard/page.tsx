@@ -1,10 +1,9 @@
-import ProductForm from "@/app/components/forms/productForm";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import ProductContainer from "./productContainer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ServicesContainer from "./servicesContainer";
 
 interface Product {
   id: string;
@@ -25,9 +24,36 @@ const Dashboard = async () => {
       <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-12">
         Dashboard
       </h1>
-      <p className="mb-12"> Seja bem-vindo, {session?.user.username}.</p>
-
-      <ProductContainer />
+      <p className="mb-12 text-xl">
+        {" "}
+        Seja bem-vindo,{" "}
+        <span className="text-prisma-orange">{session?.user.username}</span>!
+      </p>
+      <Tabs
+        defaultValue="products"
+        className="w-full flex flex-col items-center"
+      >
+        <TabsList className="flex justify-center bg-gray-300 gap-1 px-2 py-1 rounded-md">
+          <TabsTrigger
+            className="text-prisma-blue px-14 py-1 rounded-sm data-[state=active]:bg-prisma-blue data-[state=active]:text-white"
+            value="products"
+          >
+            Produtos
+          </TabsTrigger>
+          <TabsTrigger
+            className="text-prisma-blue px-14 py-1 rounded-sm data-[state=active]:bg-prisma-blue data-[state=active]:text-white"
+            value="services"
+          >
+            Serviços
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="products">
+          <ProductContainer />
+        </TabsContent>
+        <TabsContent value="services">
+          <ServicesContainer />
+        </TabsContent>
+      </Tabs>
     </main>
   );
 };
