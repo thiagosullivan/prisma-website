@@ -48,7 +48,7 @@ const ServiceForm: React.FC<AddServiceProps> = ({ fetchServices }) => {
       title: "",
       content: "",
       imgUrl: "",
-      servImg: null,
+      servImg: undefined,
     },
   });
 

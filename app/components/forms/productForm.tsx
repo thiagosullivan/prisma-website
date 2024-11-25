@@ -28,7 +28,9 @@ const formSchema = z.object({
     message: "A descrição do produto é obrigatória.",
   }),
   imgUrl: z.string().optional(),
-  prodImg: z.any(),
+  prodImg: z
+    .instanceof(File, { message: "A imagem é obrigatória." })
+    .refine((file) => file.size > 0, { message: "A imagem é obrigatória." }),
   // prodImg: z.instanceof(File).refine((file) => file.size < 700000000, {
   //   message: "Sua imagem deve ter menos de 7MB.",
   // }),
@@ -49,7 +51,7 @@ const ProductForm: React.FC<AddProductProps> = ({ fetchProducts }) => {
       title: "",
       content: "",
       imgUrl: "",
-      prodImg: null,
+      prodImg: undefined,
     },
   });
 
