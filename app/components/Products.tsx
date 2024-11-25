@@ -1,34 +1,6 @@
 import Image from "next/image";
-import ProductImg from "@/public/services.jpg";
 import Link from "next/link";
 import { db } from "@/lib/db";
-
-const data = [
-  {
-    img: "@/public/services.jpg",
-    title: "Industrial construction",
-    description:
-      "Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.",
-  },
-  {
-    img: "@/public/services.jpg",
-    title: "Industrial construction Industrial construction",
-    description:
-      "Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.",
-  },
-  {
-    img: "@/public/services.jpg",
-    title: "Industrial construction",
-    description:
-      "Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.",
-  },
-  {
-    img: "@/public/services.jpg",
-    title: "Industrial",
-    description:
-      "Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue. Waters make fish every without firmament saw had. Morning air subdue.",
-  },
-];
 
 const Products = async () => {
   const products = await db.product.findMany({
@@ -57,12 +29,12 @@ const Products = async () => {
             </span>
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-8 justify-items-center max-lg:grid-cols-1">
+        <div className="grid md:grid-cols-2 gap-x-3 gap-y-8 justify-items-center :grid-cols-1">
           {products.slice(0, 4).map((product) => {
             return (
               <div
                 key={product.id}
-                className="flex flex-col items-center max-w-[400px] w-full gap-x-7 max-sm:flex-col max-sm:mt-6"
+                className="flex flex-col items-center max-w-[400px] lg:max-w-[600px] w-full gap-x-7 max-sm:flex-col max-sm:mt-6"
               >
                 <div className="h-[300px] w-full relative max-sm:mb-6">
                   <Image
@@ -75,7 +47,7 @@ const Products = async () => {
                     }}
                   />
                 </div>
-                <div className="">
+                <div className="w-full">
                   <h4 className="font-semibold mt-4 text-2xl text-prisma-blue">
                     {product.title}
                   </h4>

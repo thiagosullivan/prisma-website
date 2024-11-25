@@ -19,7 +19,7 @@ interface ProductListProps {
   loading: boolean;
 }
 
-const ProductsList: React.FC<ProductListProps> = ({
+const ServicesList: React.FC<ProductListProps> = ({
   products,
   setProducts,
   loading,
@@ -48,8 +48,8 @@ const ProductsList: React.FC<ProductListProps> = ({
 
   if (loading) {
     return (
-      <div className="mt-12 text-xl">
-        <p>Carregando...</p>
+      <div className="mt-12 text-xl w-full">
+        <p className="w-full">Carregando...</p>
       </div>
     );
   }
@@ -66,7 +66,7 @@ const ProductsList: React.FC<ProductListProps> = ({
             className="border border-prisma-blue rounded-md overflow-hidden flex items-center p-4 max-lg:flex-col relative"
           >
             <button
-              className="bg-red-600 text-white rounded-2xl p-1 absolute top-2 right-2"
+              className="bg-red-600 text-white rounded-2xl p-1 absolute top-2 right-2 z-10"
               onClick={() => deleteProduct(product.id)}
             >
               <X size={20} />
@@ -93,4 +93,4 @@ const ProductsList: React.FC<ProductListProps> = ({
   );
 };
 
-export default ProductsList;
+export default ServicesList;
