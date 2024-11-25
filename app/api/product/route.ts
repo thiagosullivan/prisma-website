@@ -1,3 +1,4 @@
+import { supabase } from "@/app/utils/supabaseClient";
 import prisma, { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -56,6 +57,42 @@ export async function DELETE(req: Request) {
       );
     }
 
+    // Recupera o produto para obter a URL da imagem antes de deletar
+    const product = await db.product.findUnique({
+      where: { id },
+    });
+
+    if (!product) {
+      return NextResponse.json(
+        { message: "Produto não encontrado." },
+        { status: 404 }
+      );
+    }
+
+    // Extrai o caminho da imagem a partir da URL pública
+    const imagePath = product.imageUrl
+      ? product.imageUrl.replace(
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/prisma-imgs/`,
+          ""
+        )
+      : null;
+
+    // Deleta o arquivo do Supabase Storage (se existir)
+    if (imagePath) {
+      const { error: storageError } = await supabase.storage
+        .from("prisma-imgs")
+        .remove([imagePath]);
+
+      if (storageError) {
+        console.error("Erro ao deletar imagem do storage:", storageError);
+        return NextResponse.json(
+          { message: "Erro ao deletar imagem do storage." },
+          { status: 500 }
+        );
+      }
+    }
+
+    // Deleta o produto do banco de dados
     await db.product.delete({
       where: { id },
     });
