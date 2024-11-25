@@ -19,6 +19,7 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import imageCompression from "browser-image-compression";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -63,10 +64,24 @@ const ProductForm: React.FC<AddProductProps> = ({ fetchProducts }) => {
       let imageUrl = "";
 
       if (imageFile) {
+        // Configurações para compressão
+        const options = {
+          maxSizeMB: 2, // Tamanho máximo em MB
+          maxWidthOrHeight: 1024, // Largura ou altura máxima
+          useWebWorker: true, // Usa WebWorker para melhorar a performance
+        };
+
+        // Comprimir a imagem
+        const compressedImage = await imageCompression(imageFile, options);
+        console.log("Imagem comprimida:", compressedImage);
+
         // Upload da imagem
         const { data, error } = await supabase.storage
           .from("prisma-imgs")
-          .upload(`products/${Date.now()}-${imageFile.name}`, imageFile);
+          .upload(
+            `products/${Date.now()}-${compressedImage.name}`,
+            compressedImage
+          );
 
         if (error) {
           throw new Error("Erro ao fazer upload da imagem.");
