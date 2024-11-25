@@ -26,7 +26,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
-          <Toaster visibleToasts={1} position="top-right" richColors />
+          <Toaster visibleToasts={1} position="bottom-right" richColors />
         </Provider>
       </body>
     </html>
