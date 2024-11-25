@@ -54,12 +54,6 @@ const ProductForm: React.FC<AddProductProps> = ({ fetchProducts }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log("Submissão iniciada com valores:", values);
-    // if (!values.prodImg || !(values.prodImg instanceof File)) {
-    //   toast.error("Por favor, selecione uma imagem válida.");
-    //   return;
-    // }
-
     setLoading(true);
 
     try {
@@ -183,6 +177,7 @@ const ProductForm: React.FC<AddProductProps> = ({ fetchProducts }) => {
                     type="file"
                     accept="image/*"
                     ref={fileInputRef}
+                    disabled={loading}
                     onChange={(event) => {
                       const file = event.target.files?.[0]; // Obter o arquivo selecionado
                       if (file) {
