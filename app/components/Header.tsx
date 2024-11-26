@@ -3,50 +3,100 @@ import Link from "next/link";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
-import PrismaLogo from "@/public/prisma-logo-small.png";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
-import { getServerSession } from "next-auth";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { authOptions } from "@/lib/auth";
-import { signOut } from "next-auth/react";
+import { db } from "@/lib/db";
+import PrismaLogo from "@/public/prisma-logo-small.png";
+import { Menu } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { FaLinkedin } from "react-icons/fa6";
 import SignOutBtn from "./signOutBtn";
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
+  const company = await db.company.findFirst();
+
+  console.log(company, "fetch");
+
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (!phoneNumber) return ""; // Caso o número seja null ou undefined
+
+    return phoneNumber.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3");
+  };
+
+  const formattedmainPhone = formatPhoneNumber(company?.mainPhone || "");
+  const formattedSecondPhone = formatPhoneNumber(company?.secondPhone || "");
+  const formattedThirdPhone = formatPhoneNumber(company?.ThirdPhone || "");
 
   return (
     <header className="max-md:fixed w-full bg-prisma-gray z-50">
       <div className="bg-prisma-blue py-3 px-4">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-          <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
-            <FaWhatsapp className="text-xl" />
-            <Link
-              href="https://wa.me/554384817211"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="text-sm"
-            >
-              (43) 8481-7211
-            </Link>
+          <div className="flex items-center gap-x-4">
+            <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+              <FaWhatsapp className="text-xl" />
+              <Link
+                href={`https://wa.me/55${company?.mainPhone}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className="text-sm"
+              >
+                {formattedmainPhone}
+                {/* (43) 8481-7211 */}
+              </Link>
+            </div>
+            {formattedSecondPhone.length > 0 && (
+              <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+                <FaWhatsapp className="text-xl" />
+                <Link
+                  href={`https://wa.me/55${company?.secondPhone}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-sm"
+                >
+                  {formattedSecondPhone}
+                </Link>
+              </div>
+            )}
+            {formattedThirdPhone.length > 0 && (
+              <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+                <FaWhatsapp className="text-xl" />
+                <Link
+                  href={`https://wa.me/55${company?.ThirdPhone}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-sm"
+                >
+                  {formattedThirdPhone}
+                </Link>
+              </div>
+            )}
           </div>
-          <div className="flex gap-x-2 hover:brightness-75 text-[#FFFFFF]">
-            <IoMdMail className="text-xl" />
-            <Link
-              href="mailto:revestimentoprisma@gmail.com "
-              rel="noopener noreferrer"
-              target="_blank"
-              className="text-sm"
-            >
-              revestimentoprisma@gmail.com{" "}
-            </Link>
+          <div className="flex justify-end gap-4">
+            <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+              <IoMdMail className="text-xl" />
+              <Link
+                href="mailto:revestimentoprisma@gmail.com "
+                rel="noopener noreferrer"
+                target="_blank"
+                className="text-sm"
+              >
+                revestimentoprisma@gmail.com{" "}
+              </Link>
+            </div>
+            {company?.secondEmail != "" && (
+              <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+                <IoMdMail className="text-xl" />
+                <Link
+                  href="mailto:revestimentoprisma@gmail.com "
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-sm"
+                >
+                  {company?.secondEmail}{" "}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
