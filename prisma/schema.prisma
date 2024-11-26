@@ -34,3 +34,29 @@ model Service {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Company {
+  id               String @id @default(uuid())
+  mainPhone        String
+  secondPhone      String
+  ThirdPhone       String
+  mainEmail        String
+  secondEmail      String
+  address          String
+  facebookLink     String
+  instagramLink    String
+  linkedinLink     String
+  twitterLink      String
+  workinHoursOne   String
+  workinHoursTwo   String
+  workinHoursThree String
+  companyStory     String
+  companyStoryImg  String
+}
+
+model Team {
+  id         String @id @default(uuid())
+  workerName String
+  workerRole String
+  workerImg  String
+}

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import ProductContainer from "./productContainer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ServicesContainer from "./servicesContainer";
+import CompanyContainer from "./companyContainer";
 
 interface Product {
   id: string;
@@ -46,12 +47,30 @@ const Dashboard = async () => {
           >
             Serviços
           </TabsTrigger>
+          <TabsTrigger
+            className="text-prisma-blue px-14 py-1 rounded-sm data-[state=active]:bg-prisma-blue data-[state=active]:text-white"
+            value="company"
+          >
+            Empresa
+          </TabsTrigger>
+          <TabsTrigger
+            className="text-prisma-blue px-14 py-1 rounded-sm data-[state=active]:bg-prisma-blue data-[state=active]:text-white"
+            value="team"
+          >
+            Time
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="products">
           <ProductContainer />
         </TabsContent>
         <TabsContent value="services">
           <ServicesContainer />
+        </TabsContent>
+        <TabsContent value="company">
+          <CompanyContainer />
+        </TabsContent>
+        <TabsContent value="team">
+          <p>Time</p>
         </TabsContent>
       </Tabs>
     </main>
