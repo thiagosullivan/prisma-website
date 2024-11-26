@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import FooterImg from "@/public/prisma-logo-small.png";
@@ -6,37 +5,41 @@ import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { useState } from "react";
 import { toast } from "sonner";
+import { db } from "@/lib/db";
+import { BsTwitterX } from "react-icons/bs";
 
-const Footer = () => {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
+const Footer = async () => {
+  const company = await db.company.findFirst();
 
-  async function handleSubmit(event: any) {
-    event.preventDefault();
+  // const [nome, setNome] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [message, setMessage] = useState("");
 
-    if (!nome || !email || !phone || !message) {
-      toast.error("Preencha todos os campos para enviar sua mensagem!");
-      // toast('Preencha todos os campos para enviar sua mensagem!', {
-      //   style: {
-      //     background: theme.error,
-      //     color: theme.white
-      //   }
-      // });
-      console.log("CAMPOS VAZIOS");
-      return;
-    }
+  // async function handleSubmit(event: any) {
+  //   event.preventDefault();
 
-    const formData = new FormData(event.target);
+  //   if (!nome || !email || !phone || !message) {
+  //     toast.error("Preencha todos os campos para enviar sua mensagem!");
+  //     toast('Preencha todos os campos para enviar sua mensagem!', {
+  //       style: {
+  //         background: theme.error,
+  //         color: theme.white
+  //       }
+  //     });
+  //     console.log("CAMPOS VAZIOS");
+  //     return;
+  //   }
 
-    // const response = await fetch('/api/contact', {
-    //     method: 'post',
-    //     body: formData,
-    //    });
+  //   const formData = new FormData(event.target);
 
-    console.log(formData);
-  }
+  //   const response = await fetch('/api/contact', {
+  //       method: 'post',
+  //       body: formData,
+  //      });
+
+  //   console.log(formData);
+  // }
 
   const currentTime = new Date();
   const year = currentTime.getFullYear();
@@ -56,25 +59,35 @@ const Footer = () => {
 
           <div className="mt-16 flex gap-x-5 max-md:justify-center">
             <Link
-              href="https://www.facebook.com/"
+              href={`${company?.facebookLink}`}
               rel="noopener noreferrer"
               target="_blank"
             >
               <FaFacebookSquare className="text-3xl hover:text-prisma-orange-hover duration-100" />
             </Link>
             <Link
-              href="https://www.instagram.com/revestimentoprisma/"
+              // href="https://www.instagram.com/revestimentoprisma/"
+              href={`${company?.instagramLink}`}
               rel="noopener noreferrer"
               target="_blank"
             >
               <FaInstagram className="text-3xl hover:text-prisma-orange-hover duration-100" />
             </Link>
             <Link
-              href="https://www.linkedin.com/"
+              // href="https://www.linkedin.com/"
+              href={`${company?.linkedinLink}`}
               rel="noopener noreferrer"
               target="_blank"
             >
               <FaLinkedin className="text-3xl hover:text-prisma-orange-hover duration-100" />
+            </Link>
+            <Link
+              // href="https://www.linkedin.com/"
+              href={`${company?.linkedinLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <BsTwitterX className="text-3xl hover:text-prisma-orange-hover duration-100" />
             </Link>
           </div>
         </div>
@@ -133,37 +146,37 @@ const Footer = () => {
         </nav>
         <div className="max-w-[300px] w-full max-lg:max-w-[250px] max-md:max-w-[300px] max-md:text-center">
           <p className="text-xl font-bold">Contato</p>
-          <form className="" onSubmit={handleSubmit}>
+          <form className="">
             <div>
               <input
                 className="border-prisma-blue border mt-2 w-full text-sm py-1 px-3 outline-none text-prisma-blue"
                 placeholder="Nome"
-                onChange={({ target }) => setNome(target.value)}
-                value={nome}
+                // onChange={({ target }) => setNome(target.value)}
+                // value={nome}
               />
             </div>
             <div>
               <input
                 className="border-prisma-blue border mt-2 w-full text-sm py-1 px-3 outline-none text-prisma-blue"
                 placeholder="E-mail"
-                onChange={({ target }) => setEmail(target.value)}
-                value={email}
+                // onChange={({ target }) => setEmail(target.value)}
+                // value={email}
               />
             </div>
             <div>
               <input
                 className="border-prisma-blue border mt-2 w-full text-sm py-1 px-3 outline-none text-prisma-blue"
                 placeholder="Telefone"
-                onChange={({ target }) => setPhone(target.value)}
-                value={phone}
+                // onChange={({ target }) => setPhone(target.value)}
+                // value={phone}
               />
             </div>
             <div>
               <textarea
                 className="border-prisma-blue border mt-2 w-full text-sm py-1 px-3 outline-none text-prisma-blue resize-none h-36"
                 placeholder="Mensagem"
-                onChange={({ target }) => setMessage(target.value)}
-                value={message}
+                // onChange={({ target }) => setMessage(target.value)}
+                // value={message}
               />
             </div>
             <button
@@ -185,6 +198,15 @@ const Footer = () => {
             className="hover:text-prisma-orange"
           >
             <span> Thiago Sullivan </span>
+          </Link>
+          e
+          <Link
+            href="https://thiagosullivanportfolio.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-prisma-orange"
+          >
+            <span> ATS Web Solutions </span>
           </Link>
           | Copyright ©{year} Todos os Direitos Reservados |
           <span className="text-prisma-orange uppercase">
