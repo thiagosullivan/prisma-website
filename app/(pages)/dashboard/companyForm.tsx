@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -30,8 +30,12 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import InputMask from "react-input-mask";
+import { useRouter } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const formSchema = z.object({
+  id: z.string(),
+  companyStoryImg: z.string(),
   mainPhone: z.string().min(1, {
     message: "O telefone é obrigatório.",
   }),
@@ -44,46 +48,47 @@ const formSchema = z.object({
     })
     .toLowerCase(),
   secondEmail: z.string().toLowerCase().optional(),
-  street: z.string().min(1, {
+  streetAddress: z.string().min(1, {
     message: "O endereço é obrigatório.",
   }),
-  streetNumber: z.string().min(1, {
+  numberAddress: z.string().min(1, {
     message: "O endereço é obrigatório.",
   }),
-  city: z.string().min(1, {
+  cityAddress: z.string().min(1, {
     message: "O endereço é obrigatório.",
   }),
-  state: z.string().max(2, {
+  stateAddress: z.string().max(2, {
     message: "Inserir apenas as siglas do estado.",
   }),
-  zipcode: z.string().min(1, {
+  zipcodeAddress: z.string().min(1, {
     message: "O endereço é obrigatório.",
   }),
   facebookLink: z.string().optional(),
   instagramLink: z.string().optional(),
   linkedinLink: z.string().optional(),
   twitterLink: z.string().optional(),
-  workinHourDayOne: z.string().min(1, {
+  workinHoursDayOne: z.string().min(1, {
     message: "O dia é obrigatório.",
   }),
-  workinHourOpenOne: z.string().min(1, {
+  workinHoursOpenOne: z.string().min(1, {
     message: "O horário de abertura é obrigatório.",
   }),
-  workinHourCloseOne: z.string().min(1, {
+  workinHoursCloseOne: z.string().min(1, {
     message: "O de fechamento é obrigatório.",
   }),
-  workinHourDayTwo: z.string().optional(),
-  workinHourOpenTwo: z.string().optional(),
-  workinHourCloseTwo: z.string().optional(),
-  workinHourDayThree: z.string().optional(),
-  workinHourCloseThree: z.string().optional(),
+  workinHoursDayTwo: z.string().optional(),
+  workinHoursOpenTwo: z.string().optional(),
+  workinHoursCloseTwo: z.string().optional(),
+  workinHoursDayThree: z.string().optional(),
+  workinHoursCloseThree: z.string().optional(),
   companyStory: z.string().min(1, {
     message: "O texto é obrigatório.",
   }),
   imgUrl: z.string().optional(),
   companyImg: z
     .instanceof(File, { message: "A imagem é obrigatória." })
-    .refine((file) => file.size > 0, { message: "A imagem é obrigatória." }),
+    .refine((file) => file.size > 0, { message: "A imagem é obrigatória." })
+    .optional(),
   // prodImg: z.instanceof(File).refine((file) => file.size < 700000000, {
   //   message: "Sua imagem deve ter menos de 7MB.",
   // }),
@@ -96,45 +101,77 @@ interface AddCompanyProps {
 const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
+  const [initialData, setInitialData] = useState<z.infer<
+    typeof formSchema
+  > | null>(null);
+  const router = useRouter();
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: initialData || {
       mainPhone: "",
       secondPhone: "",
       thirdPhone: "",
       mainEmail: "",
       secondEmail: "",
-      street: "",
-      streetNumber: "",
-      city: "",
-      state: "",
-      zipcode: "",
+      streetAddress: "",
+      numberAddress: "",
+      cityAddress: "",
+      stateAddress: "",
+      zipcodeAddress: "",
       facebookLink: "",
       instagramLink: "",
       linkedinLink: "",
       twitterLink: "",
-      workinHourDayOne: "",
-      workinHourOpenOne: "",
-      workinHourCloseOne: "",
-      workinHourDayTwo: "",
-      workinHourOpenTwo: "",
-      workinHourCloseTwo: "",
+      workinHoursDayOne: "",
+      workinHoursOpenOne: "",
+      workinHoursCloseOne: "",
+      workinHoursDayTwo: "",
+      workinHoursOpenTwo: "",
+      workinHoursCloseTwo: "",
+      workinHoursDayThree: "",
+      workinHoursCloseThree: "",
       companyStory: "",
       imgUrl: "",
       companyImg: undefined,
     },
   });
 
+  const { reset } = form;
+
+  // Busca os dados iniciais da API
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/company");
+        const data = await response.json();
+
+        if (data) {
+          // Ajuste de valores, se necessário, para formatar
+          const formattedData = {
+            ...data,
+          };
+
+          setInitialData(data.company);
+          form.reset(data.company); // Atualiza os valores do formulário
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados iniciais:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialData();
+  }, [form, reset]);
+
+  console.log(initialData, "INITIAL DATA");
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values, "VALUES");
-
-    const address = `${values.street}, ${values.streetNumber}, ${values.city} - ${values.state}, ${values.zipcode}`;
-    const workinHoursOne = `${values.workinHourDayOne} (${values.workinHourOpenOne} - ${values.workinHourCloseOne})`;
-    const workinHoursTwo = `${values.workinHourDayTwo} (${values.workinHourOpenTwo} - ${values.workinHourCloseTwo})`;
-    const workinHoursThree = `${values.workinHourDayThree} (${values.workinHourCloseThree})`;
 
     try {
       const imageFile = values.companyImg; // Campo com o arquivo
@@ -179,27 +216,72 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
 
       console.log(imageUrl, "IMAGE URL");
 
-      const response = await fetch("/api/company", {
-        method: "POST",
+      // const response = await fetch("/api/company", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     mainPhone: values.mainPhone,
+      //     secondPhone: values.secondPhone,
+      //     thirdPhone: values.thirdPhone,
+      //     mainEmail: values.mainEmail,
+      //     secondEmail: values.secondEmail,
+      //     streetAddress: values.streetAddress,
+      //     numberAddress: values.numberAddress,
+      //     cityAddress: values.cityAddress,
+      //     stateAddress: values.stateAddress,
+      //     zipcodeAddress: values.zipcodeAddress,
+      //     facebookLink: values.facebookLink,
+      //     instagramLink: values.instagramLink,
+      //     linkedinLink: values.linkedinLink,
+      //     twitterLink: values.twitterLink,
+      //     workinHoursDayOne: values.workinHoursDayOne,
+      //     workinHoursOpenOne: values.workinHoursOpenOne,
+      //     workinHoursCloseOne: values.workinHoursCloseOne,
+      //     workinHoursDayTwo: values.workinHoursDayTwo,
+      //     workinHoursOpenTwo: values.workinHoursOpenTwo,
+      //     workinHoursCloseTwo: values.workinHoursCloseTwo,
+      //     workinHoursDayThree: values.workinHoursDayThree,
+      //     workinHoursCloseThree: values.workinHoursCloseThree,
+      //     companyStory: values.companyStory,
+      //     companyStoryImg: imageUrl, // URL gerada
+      //   }),
+      // });
+
+      const currentCompanyImg =
+        imageUrl === "" ? initialData?.companyStoryImg : imageUrl;
+
+      const response = await fetch(`/api/company?id=${initialData?.id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           mainPhone: values.mainPhone,
           secondPhone: values.secondPhone,
-          ThirdPhone: values.thirdPhone,
+          thirdPhone: values.thirdPhone,
           mainEmail: values.mainEmail,
           secondEmail: values.secondEmail,
-          address: address,
+          streetAddress: values.streetAddress,
+          numberAddress: values.numberAddress,
+          cityAddress: values.cityAddress,
+          stateAddress: values.stateAddress,
+          zipcodeAddress: values.zipcodeAddress,
           facebookLink: values.facebookLink,
           instagramLink: values.instagramLink,
           linkedinLink: values.linkedinLink,
           twitterLink: values.twitterLink,
-          workinHoursOne: workinHoursOne,
-          workinHoursTwo: workinHoursTwo,
-          workinHoursThree: workinHoursThree,
+          workinHoursDayOne: values.workinHoursDayOne,
+          workinHoursOpenOne: values.workinHoursOpenOne,
+          workinHoursCloseOne: values.workinHoursCloseOne,
+          workinHoursDayTwo: values.workinHoursDayTwo,
+          workinHoursOpenTwo: values.workinHoursOpenTwo,
+          workinHoursCloseTwo: values.workinHoursCloseTwo,
+          workinHoursDayThree: values.workinHoursDayThree,
+          workinHoursCloseThree: values.workinHoursCloseThree,
           companyStory: values.companyStory,
-          companyStoryImg: imageUrl, // URL gerada
+          companyStoryImg: currentCompanyImg,
         }),
       });
 
@@ -208,10 +290,11 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           fileInputRef.current.value = ""; // Limpa o input de arquivo
         }
         console.log("Dados salvos com sucesso!");
-        // fetchCompany();
+        fetchCompany();
         toast.success("Dados salvos com sucesso!");
         form.reset();
         setPreview(null); // Remove pré-visualização
+        // router.refresh();
       } else {
         throw new Error("Erro ao salvar dados da empresa.");
       }
@@ -222,6 +305,29 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
       setLoading(false);
     }
   };
+
+  // return (
+  //   <div>
+  //     {loading && <p>Carregando...</p>}
+  //     {!loading && initialData && (
+  //       <Form {...form}>
+  //         <form
+  //           onSubmit={form.handleSubmit(onSubmit)}
+  //           className="space-y-8 mt-10"
+  //         >
+  //           {/* Seu formulário continua aqui */}
+  //         </form>
+  //       </Form>
+  //     )}
+  //   </div>
+  // );
+  if (loading) {
+    return (
+      <div>
+        <p>loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -354,7 +460,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           <div className="grid grid-cols-3 gap-3">
             <FormField
               control={form.control}
-              name="street"
+              name="streetAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Rua</FormLabel>
@@ -367,7 +473,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="streetNumber"
+              name="numberAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Número</FormLabel>
@@ -380,7 +486,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="city"
+              name="cityAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Cidade</FormLabel>
@@ -393,17 +499,14 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="state"
+              name="stateAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Estado</FormLabel>
                   {/* <FormControl>
                     <Input disabled={loading} placeholder="Estado" {...field} />
                   </FormControl> */}
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Selecionar o estado" />
@@ -445,7 +548,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="zipcode"
+              name="zipcodeAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>CEP</FormLabel>
@@ -541,14 +644,11 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           <div className="grid grid-cols-3 gap-3 justify-self-start mt-3">
             <FormField
               control={form.control}
-              name="workinHourDayOne"
+              name="workinHoursDayOne"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Dia</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Selecionar dia" />
@@ -566,7 +666,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="workinHourOpenOne"
+              name="workinHoursOpenOne"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Horário de Abertura</FormLabel>
@@ -584,7 +684,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="workinHourCloseOne"
+              name="workinHoursCloseOne"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Horário de fechamento</FormLabel>
@@ -605,14 +705,11 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           <div className="grid grid-cols-3 gap-3 justify-self-start mt-3">
             <FormField
               control={form.control}
-              name="workinHourDayTwo"
+              name="workinHoursDayTwo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Dia</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Selecionar dia" />
@@ -629,7 +726,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="workinHourOpenTwo"
+              name="workinHoursOpenTwo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Horário de Abertura</FormLabel>
@@ -647,7 +744,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="workinHourCloseTwo"
+              name="workinHoursCloseTwo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Horário de fechamento</FormLabel>
@@ -668,14 +765,11 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           <div className="grid grid-cols-3 gap-3 justify-self-start mt-3">
             <FormField
               control={form.control}
-              name="workinHourDayThree"
+              name="workinHoursDayThree"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Dia</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Selecionar dia" />
@@ -692,14 +786,11 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             />
             <FormField
               control={form.control}
-              name="workinHourCloseThree"
+              name="workinHoursCloseThree"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Horário de Abertura</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Selecionar dia" />
@@ -736,6 +827,26 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
                 </FormItem>
               )}
             />
+          </div>
+          <div>
+            <FormLabel>Imagem atual</FormLabel>
+            <FormDescription>
+              Essa é a imagem atual na página &#34;Sobre&#34;
+            </FormDescription>
+            {initialData?.companyStoryImg ? (
+              <Image
+                src={
+                  initialData?.companyStoryImg
+                    ? initialData?.companyStoryImg
+                    : "/default-image.jpg"
+                }
+                alt="Image da história da empresa"
+                width={150}
+                height={150}
+              />
+            ) : (
+              <Skeleton className="w-[150px] h-[150px]" />
+            )}
           </div>
           <FormField
             control={form.control}

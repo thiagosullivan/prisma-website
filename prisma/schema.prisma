@@ -36,22 +36,31 @@ model Service {
 }
 
 model Company {
-  id               String @id @default(uuid())
-  mainPhone        String
-  secondPhone      String
-  ThirdPhone       String
-  mainEmail        String
-  secondEmail      String
-  address          String
-  facebookLink     String
-  instagramLink    String
-  linkedinLink     String
-  twitterLink      String
-  workinHoursOne   String
-  workinHoursTwo   String
-  workinHoursThree String
-  companyStory     String
-  companyStoryImg  String
+  id                    String @id @default(uuid())
+  mainPhone             String
+  secondPhone           String
+  thirdPhone            String
+  mainEmail             String
+  secondEmail           String
+  streetAddress         String
+  numberAddress         String
+  cityAddress           String
+  stateAddress          String
+  zipcodeAddress        String
+  facebookLink          String
+  instagramLink         String
+  linkedinLink          String
+  twitterLink           String
+  workinHoursDayOne     String
+  workinHoursOpenOne    String
+  workinHoursCloseOne   String
+  workinHoursDayTwo     String
+  workinHoursOpenTwo    String
+  workinHoursCloseTwo   String
+  workinHoursDayThree   String
+  workinHoursCloseThree String
+  companyStory          String
+  companyStoryImg       String
 }
 
 model Team {

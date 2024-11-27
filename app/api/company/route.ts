@@ -9,17 +9,26 @@ export async function POST(req: Request) {
     const {
       mainPhone,
       secondPhone,
-      ThirdPhone,
+      thirdPhone,
       mainEmail,
       secondEmail,
-      address,
+      streetAddress,
+      numberAddress,
+      cityAddress,
+      stateAddress,
+      zipcodeAddress,
       facebookLink,
       instagramLink,
       linkedinLink,
       twitterLink,
-      workinHoursOne,
-      workinHoursTwo,
-      workinHoursThree,
+      workinHoursDayOne,
+      workinHoursOpenOne,
+      workinHoursCloseOne,
+      workinHoursDayTwo,
+      workinHoursOpenTwo,
+      workinHoursCloseTwo,
+      workinHoursDayThree,
+      workinHoursCloseThree,
       companyStory,
       companyStoryImg,
     } = body;
@@ -29,17 +38,26 @@ export async function POST(req: Request) {
       data: {
         mainPhone: mainPhone,
         secondPhone: secondPhone,
-        ThirdPhone: ThirdPhone,
+        thirdPhone: thirdPhone,
         mainEmail: mainEmail,
         secondEmail: secondEmail,
-        address: address,
+        streetAddress: streetAddress,
+        numberAddress: numberAddress,
+        cityAddress: cityAddress,
+        stateAddress: stateAddress,
+        zipcodeAddress: zipcodeAddress,
         facebookLink: facebookLink,
         instagramLink: instagramLink,
         linkedinLink: linkedinLink,
         twitterLink: twitterLink,
-        workinHoursOne: workinHoursOne,
-        workinHoursTwo: workinHoursTwo,
-        workinHoursThree: workinHoursThree,
+        workinHoursDayOne,
+        workinHoursOpenOne,
+        workinHoursCloseOne,
+        workinHoursDayTwo,
+        workinHoursOpenTwo,
+        workinHoursCloseTwo,
+        workinHoursDayThree,
+        workinHoursCloseThree,
         companyStory: companyStory,
         companyStoryImg: companyStoryImg,
       },
@@ -69,6 +87,127 @@ export async function GET() {
     console.error("Erro ao buscar empresas:", error);
     return NextResponse.json(
       { error: "Erro ao buscar empresas" },
+      { status: 500 }
+    );
+  }
+}
+
+// export async function PUT(req: Request) {
+//   return NextResponse.json({ message: "ENTROU NO PUT" });
+
+//   try {
+//     // Buscando apenas o primeiro objeto
+//     // const updateUser = await prisma.company.update({
+//     //   where: {
+//     //     email: 'viola@prisma.io',
+//     //   },
+//     //   data: {
+//     //     name: 'Viola the Magnificent',
+//     //   },
+//     // })
+//     return NextResponse.json({ message: "ENTROU NO TRY" });
+//   } catch (error) {
+//     console.error("Erro ao buscar empresas:", error);
+//     return NextResponse.json(
+//       { error: "Erro ao buscar empresas" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+export async function PUT(req: Request) {
+  console.log("ENTROU NO REQ PUT");
+
+  try {
+    // Extraindo o id da query string
+    const url = new URL(req.url);
+    const companyId = url.searchParams.get("id"); // Obtendo o valor de "id" da URL
+
+    if (!companyId) {
+      return NextResponse.json({ message: "ID is required" }, { status: 400 });
+    }
+
+    const body = await req.json();
+    const {
+      mainPhone,
+      secondPhone,
+      thirdPhone,
+      mainEmail,
+      secondEmail,
+      streetAddress,
+      numberAddress,
+      cityAddress,
+      stateAddress,
+      zipcodeAddress,
+      facebookLink,
+      instagramLink,
+      linkedinLink,
+      twitterLink,
+      workinHoursDayOne,
+      workinHoursOpenOne,
+      workinHoursCloseOne,
+      workinHoursDayTwo,
+      workinHoursOpenTwo,
+      workinHoursCloseTwo,
+      workinHoursDayThree,
+      workinHoursCloseThree,
+      companyStory,
+      companyStoryImg,
+    } = body;
+
+    // Verificando se a empresa com o ID fornecido existe
+    const existingCompany = await prisma.company.findUnique({
+      where: { id: companyId }, // Usando o id como string
+    });
+
+    if (!existingCompany) {
+      return NextResponse.json(
+        { message: "Company not found" },
+        { status: 404 }
+      );
+    }
+
+    // Atualizando os dados da empresa
+    const updatedCompany = await prisma.company.update({
+      where: { id: companyId },
+      data: {
+        mainPhone: mainPhone,
+        secondPhone: secondPhone,
+        thirdPhone: thirdPhone,
+        mainEmail: mainEmail,
+        secondEmail: secondEmail,
+        streetAddress: streetAddress,
+        numberAddress: numberAddress,
+        cityAddress: cityAddress,
+        stateAddress: stateAddress,
+        zipcodeAddress: zipcodeAddress,
+        facebookLink: facebookLink,
+        instagramLink: instagramLink,
+        linkedinLink: linkedinLink,
+        twitterLink: twitterLink,
+        workinHoursDayOne,
+        workinHoursOpenOne,
+        workinHoursCloseOne,
+        workinHoursDayTwo,
+        workinHoursOpenTwo,
+        workinHoursCloseTwo,
+        workinHoursDayThree,
+        workinHoursCloseThree,
+        companyStory: companyStory,
+        companyStoryImg: companyStoryImg,
+      },
+    });
+
+    console.log(updatedCompany, "UPDATED DATA");
+
+    return NextResponse.json(
+      { updatedCompany, message: "Company updated successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log("CAIU NO CATCH", error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
       { status: 500 }
     );
   }
