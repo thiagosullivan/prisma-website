@@ -49,20 +49,21 @@ const formSchema = z.object({
     .toLowerCase(),
   secondEmail: z.string().toLowerCase().optional(),
   streetAddress: z.string().min(1, {
-    message: "O endereço é obrigatório.",
+    message: "A rua é obrigatória.",
   }),
   numberAddress: z.string().min(1, {
-    message: "O endereço é obrigatório.",
+    message: "O número é obrigatório.",
   }),
   cityAddress: z.string().min(1, {
-    message: "O endereço é obrigatório.",
+    message: "A cidade é obrigatória.",
   }),
   stateAddress: z.string().max(2, {
-    message: "Inserir apenas as siglas do estado.",
+    message: "O estado é obrigatório.",
   }),
   zipcodeAddress: z.string().min(1, {
-    message: "O endereço é obrigatório.",
+    message: "O CEP é obrigatório.",
   }),
+  googleMapsAddress: z.string().optional(),
   facebookLink: z.string().optional(),
   instagramLink: z.string().optional(),
   linkedinLink: z.string().optional(),
@@ -121,6 +122,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
       cityAddress: "",
       stateAddress: "",
       zipcodeAddress: "",
+      googleMapsAddress: "",
       facebookLink: "",
       instagramLink: "",
       linkedinLink: "",
@@ -232,6 +234,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
       //     cityAddress: values.cityAddress,
       //     stateAddress: values.stateAddress,
       //     zipcodeAddress: values.zipcodeAddress,
+      //      googleMapsAddress: values.googleMapsAddress,
       //     facebookLink: values.facebookLink,
       //     instagramLink: values.instagramLink,
       //     linkedinLink: values.linkedinLink,
@@ -268,6 +271,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
           cityAddress: values.cityAddress,
           stateAddress: values.stateAddress,
           zipcodeAddress: values.zipcodeAddress,
+          googleMapsAddress: values.googleMapsAddress,
           facebookLink: values.facebookLink,
           instagramLink: values.instagramLink,
           linkedinLink: values.linkedinLink,
@@ -564,6 +568,23 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="googleMapsAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Link do Google Maps</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder="https://maps.app.goo.gl/uBj5AviiHcAHEUuXA"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Separator />
           <h3 className="text-2xl text-prisma-orange">Mídias Sociais</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">

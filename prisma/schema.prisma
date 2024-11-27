@@ -47,6 +47,7 @@ model Company {
   cityAddress           String
   stateAddress          String
   zipcodeAddress        String
+  googleMapsAddress     String
   facebookLink          String
   instagramLink         String
   linkedinLink          String
