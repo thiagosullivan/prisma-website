@@ -1,14 +1,68 @@
-const Sobre = () => {
-    return (
-        <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col justify-center mainnew max-md:pt-40">
-            <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-8">
-                Sobre a <span className="text-prisma-orange">Prisma</span>
-            </h1>
-            <p className="text-prisma-blue text-lg text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero sequi cumque pariatur mollitia odit consequatur hic deserunt nihil doloribus debitis totam necessitatibus dolor modi tenetur accusantium dolorem tempora ut nulla ex, eaque amet nobis in explicabo natus? Ut inventore qui dolore cupiditate? Ullam incidunt alias, sequi nemo dolor omnis voluptas odio eum doloribus, tempora consectetur consequuntur officiis illum ipsam voluptatibus eos iusto aliquam doloremque. Sint accusamus, ab nemo iusto beatae vel voluptate modi quod harum dolores eum expedita tempore unde impedit? Nisi eos est quia possimus libero non dolorem. Ipsam porro quos hic minus veritatis autem, ipsum atque nostrum neque?
-            </p>
-        </main>
-    );
-}
- 
+import { Skeleton } from "@/components/ui/skeleton";
+import { db } from "@/lib/db";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+const Sobre = async () => {
+  const company = await db.company.findFirst();
+  console.log(company?.companyStoryImg, "STORY IMAGE");
+  //   const [loading, setLoading] = useState<boolean>(false);
+  //   const [company, setCompany] = useState();
+
+  //   console.log(company?.companyStoryImg, "COMPANY");
+
+  //   const fetchCompany = async () => {
+  //     try {
+  //       const response = await fetch("/api/company");
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setCompany(data.company);
+  //       } else {
+  //         console.error("Erro ao buscar empresa");
+  //       }
+  //     } catch (error) {
+  //       console.error("Erro na requisição:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     fetchCompany();
+  //   }, []);
+
+  return (
+    <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col justify-center mainnew max-md:pt-40">
+      <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-8">
+        Sobre a <span className="text-prisma-orange">Prisma</span>
+      </h1>
+      <p className="text-prisma-blue text-lg text-justify mb-10">
+        {company?.companyStory}
+      </p>
+      <div className="w-[700px] h-[400px] relative mx-auto">
+        {/* {company?.companyStoryImg ? (
+          <Image
+            src={
+              company?.companyStoryImg
+                ? company?.companyStoryImg
+                : "/default-image.jpg"
+            }
+            width={50}
+            height={50}
+            alt="Empresa Prisma"
+          />
+        ) : (
+          <Skeleton className="w-[150px] h-[150px]" />
+        )} */}
+        <Image
+          src={`${company?.companyStoryImg}`}
+          fill
+          alt="Empresa Prisma"
+          className="object-cover"
+        />
+      </div>
+    </main>
+  );
+};
+
 export default Sobre;
