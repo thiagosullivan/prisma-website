@@ -9,6 +9,16 @@ const Produtos = async () => {
     },
   });
 
+  const company = await db.company.findFirst();
+
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (!phoneNumber) return "";
+
+    return phoneNumber.replace(/\D/g, "");
+  };
+
+  // const formattedmainPhone = formatPhoneNumber(company?.mainPhone || "");
+
   return (
     <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col items-center mainnew mb-10">
       <div className="mt-24 w-full">
@@ -43,7 +53,9 @@ const Produtos = async () => {
                   </h3>
                   <p className="text-sm mb-8">{product.content}</p>
                   <Link
-                    href="https://wa.me/554384817211"
+                    href={`https://wa.me/55${formatPhoneNumber(
+                      company?.mainPhone || ""
+                    )}`}
                     rel="noopener noreferrer"
                     target="_blank"
                     className="bg-prisma-orange m-auto text-[#FFFFFF] px-6 py-3 hover:bg-prisma-orange-hover inline-block max-lg:mt-auto"
