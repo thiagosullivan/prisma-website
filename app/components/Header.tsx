@@ -12,6 +12,7 @@ import { getServerSession } from "next-auth";
 import { FaLinkedin } from "react-icons/fa6";
 import SignOutBtn from "./signOutBtn";
 import RedirectToHome from "./redirectToHome";
+import { Separator } from "@/components/ui/separator";
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
@@ -41,7 +42,7 @@ const Header = async () => {
 
   return (
     <header className="max-md:fixed w-full bg-prisma-gray z-50">
-      <div className="bg-prisma-blue py-3 px-4">
+      <div className="bg-prisma-blue py-3 px-4 max-md:hidden">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-x-4">
             <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
@@ -83,8 +84,8 @@ const Header = async () => {
               </div>
             )}
           </div>
-          <div className="flex justify-end gap-4">
-            <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+          <div className="flex justify-end gap-4 max-md:flex-col max-md:gap-1">
+            <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF] max-md:justify-end">
               <IoMdMail className="text-xl" />
               <Link
                 href={`mailto:${company?.mainEmail}`}
@@ -97,7 +98,7 @@ const Header = async () => {
               </Link>
             </div>
             {company?.secondEmail != "" && (
-              <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
+              <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF] max-md:justify-end">
                 <IoMdMail className="text-xl" />
                 <Link
                   href={`mailto:${company?.secondEmail}`}
@@ -115,21 +116,12 @@ const Header = async () => {
       <div className="max-md:hidden">
         <div className="bg-prisma-gray py-5 px-4 shadownew">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-            {/* <Link href="/">
-              OLD
-              <Image
-                src={PrismaLogo}
-                alt="Prisma Logo"
-                width={200}
-                height={50}
-              />
-            </Link> */}
             <RedirectToHome
               PrismaLogo={PrismaLogo}
               widthNumber={200}
               heightNumber={50}
             />
-            <nav>
+            <nav className="px-8">
               <ul className="flex gap-x-8 max-lg:gap-x-5 text-prisma-blue font-semibold text-base">
                 <li>
                   <Link
@@ -201,7 +193,7 @@ const Header = async () => {
             <Menu size={30} className="text-prisma-blue" />
           </SheetTrigger>
           <SheetContent>
-            <ul className="h-3/4 flex flex-col justify-center items-center text-prisma-blue text-2xl gap-6">
+            <ul className="h-3/5 flex flex-col justify-center items-center text-prisma-blue text-2xl gap-6">
               <li>
                 <SheetTrigger asChild>
                   <Link
@@ -257,10 +249,80 @@ const Header = async () => {
               href="https://wa.me/554384817211"
               rel="noopener noreferrer"
               target="_blank"
-              className="bg-prisma-orange text-[#FFFFFF] text-center text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100 m-auto block"
+              className="bg-prisma-orange text-[#FFFFFF] text-center text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100 m-auto block mb-12"
             >
               Fale Conosco
             </Link>
+            <Separator className="mb-3" />
+            <div className="flex flex-col gap-1 mb-3">
+              <div className="flex text-prisma-blue">
+                <FaWhatsapp className="text-xl" />
+                <Link
+                  href={`https://wa.me/55${formattedmainPhone}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-md"
+                >
+                  {formatPhoneNumberShow(company?.mainPhone)}
+                  {/* (43) 8481-7211 */}
+                </Link>
+              </div>
+              {formattedSecondPhone.length > 0 && (
+                <div className="flex gap-x-1 hover:brightness-75 text-prisma-blue">
+                  <FaWhatsapp className="text-xl" />
+                  <Link
+                    href={`https://wa.me/55${formattedSecondPhone}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-md"
+                  >
+                    {formatPhoneNumberShow(company?.secondPhone)}
+                  </Link>
+                </div>
+              )}
+              {formattedThirdPhone.length > 0 && (
+                <div className="flex gap-x-1 hover:brightness-75 text-prisma-blue">
+                  <FaWhatsapp className="text-xl" />
+                  <Link
+                    href={`https://wa.me/55${formattedThirdPhone}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-md"
+                  >
+                    {formatPhoneNumberShow(company?.thirdPhone)}
+                  </Link>
+                </div>
+              )}
+            </div>
+            <Separator className="mb-3" />
+            <div className="flex flex-col gap-1 mb-3">
+              <div className="flex gap-x-1 hover:brightness-75 text-prisma-blue">
+                <IoMdMail className="text-xl" />
+                <Link
+                  href={`mailto:${company?.mainEmail}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-md"
+                >
+                  {/* revestimentoprisma@gmail.com{" "} */}
+                  {company?.mainEmail}
+                </Link>
+              </div>
+              {company?.secondEmail != "" && (
+                <div className="flex gap-x-1 hover:brightness-75 text-prisma-blue">
+                  <IoMdMail className="text-xl" />
+                  <Link
+                    href={`mailto:${company?.secondEmail}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-md"
+                  >
+                    {company?.secondEmail}{" "}
+                  </Link>
+                </div>
+              )}
+            </div>
+            <Separator className="mb-3" />
             <div className="flex gap-x-6 justify-center mt-12">
               <Link
                 href="https://www.facebook.com/"
