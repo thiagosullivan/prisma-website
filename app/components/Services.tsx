@@ -25,17 +25,21 @@ const Services = async () => {
             qualidade
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-x-3 gap-y-8 justify-center justify-items-center mt-24 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        <div className="grid grid-cols-3 gap-12 justify-center justify-items-center mt-24 max-lg:grid-cols-2 max-sm:grid-cols-1">
           {services.slice(0, 3).map((service) => {
             return (
-              <div className="max-w-[360px]" key={service.id}>
-                <Image
-                  src={service.imageUrl}
-                  alt="Serviços"
-                  width={360}
-                  height={310}
-                  className="rounded-md"
-                />
+              <div
+                className="max-w-[300px] flex flex-col items-center max-sm:max-w-[100%]"
+                key={service.id}
+              >
+                <div className="w-[300px] h-[250px] max-md:w-[250px] max-md:h-[200px] relative">
+                  <Image
+                    src={service.imageUrl}
+                    alt="Serviços"
+                    fill
+                    className="rounded-md object-cover"
+                  />
+                </div>
                 <h3 className="font-semibold text-2xl mt-7">{service.title}</h3>
                 <p className="mt-5 text-justify">{service.content}</p>
               </div>
