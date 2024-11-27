@@ -39,21 +39,7 @@ const Sobre = async () => {
       <p className="text-prisma-blue text-lg text-justify mb-10">
         {company?.companyStory}
       </p>
-      <div className="w-[700px] h-[400px] relative mx-auto">
-        {/* {company?.companyStoryImg ? (
-          <Image
-            src={
-              company?.companyStoryImg
-                ? company?.companyStoryImg
-                : "/default-image.jpg"
-            }
-            width={50}
-            height={50}
-            alt="Empresa Prisma"
-          />
-        ) : (
-          <Skeleton className="w-[150px] h-[150px]" />
-        )} */}
+      <div className="max-w-[700px]  w-full h-[400px] relative mx-auto">
         <Image
           src={`${company?.companyStoryImg}`}
           fill
