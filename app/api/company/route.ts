@@ -1,8 +1,19 @@
 import { supabase } from "@/app/utils/supabaseClient";
 import prisma, { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  const token = await getToken({ req });
+  console.log(token, "TOKEN");
+
+  if (!token) {
+    console.log("NÃO AUTENTICADO");
+    return NextResponse.json(
+      { message: "You're a unauthorized user" },
+      { status: 401 }
+    );
+  }
   console.log("ENTROU NO REQ POST");
   try {
     const body = await req.json();

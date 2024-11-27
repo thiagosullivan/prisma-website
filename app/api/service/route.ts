@@ -1,8 +1,20 @@
 import { supabase } from "@/app/utils/supabaseClient";
 import prisma, { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  const token = await getToken({ req });
+  console.log(token, "TOKEN");
+
+  if (!token) {
+    console.log("NÃO AUTENTICADO");
+    return NextResponse.json(
+      { message: "You're a unauthorized user" },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.json();
     const { title, content, imgUrl } = body;
@@ -58,7 +70,7 @@ export async function DELETE(req: Request) {
     }
 
     // Recupera o serviço para obter a URL da imagem antes de deletar
-    const service = await db.service.findUnique({ 
+    const service = await db.service.findUnique({
       where: { id },
     });
 
