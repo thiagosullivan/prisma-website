@@ -11,7 +11,7 @@ const Produtos = async () => {
 
   return (
     <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col items-center mainnew mb-10">
-      <div className="mt-24">
+      <div className="mt-24 w-full">
         <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-8">
           Os produtos da <span className="text-prisma-orange">Prisma</span>
         </h1>
@@ -26,7 +26,7 @@ const Produtos = async () => {
                 key={product.id}
                 className="border border-prisma-blue rounded-md overflow-hidden flex items-center p-4 max-lg:flex-col"
               >
-                <div className="h-[260px] w-full relative mr-5 max-lg:h-[200px] max-lg:mr-0 max-lg:mb-5 max-sm:w-[250px]">
+                <div className="h-[260px] w-full relative mr-5 max-lg:h-[300px] max-lg:mr-0 max-lg:mb-5 max-sm:w-[250px]">
                   <Image
                     src={product.imageUrl}
                     alt={product.title}
@@ -41,7 +41,7 @@ const Produtos = async () => {
                   <h3 className="font-semibold text-lg mb-2">
                     {product.title}
                   </h3>
-                  <p className="text-sm text-justify mb-8">{product.content}</p>
+                  <p className="text-sm mb-8">{product.content}</p>
                   <Link
                     href="https://wa.me/554384817211"
                     rel="noopener noreferrer"
