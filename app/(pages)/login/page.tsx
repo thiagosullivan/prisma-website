@@ -71,7 +71,7 @@ const Login = () => {
                   <FormControl>
                     <Input
                       className="border border-prisma-blue rounded-md overflow-hidden w-full p-2"
-                      placeholder="email@examplo.com"
+                      placeholder="email@exemplo.com"
                       {...field}
                     />
                   </FormControl>
@@ -102,7 +102,7 @@ const Login = () => {
             className="bg-prisma-blue rounded-sm p-2 text-white hover:bg-prisma-orange transition"
             type="submit"
           >
-            Sign in
+            Entrar
           </Button>
         </form>
       </Form>
