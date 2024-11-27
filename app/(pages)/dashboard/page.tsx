@@ -5,6 +5,7 @@ import ProductContainer from "./productContainer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ServicesContainer from "./servicesContainer";
 import CompanyContainer from "./companyContainer";
+import TeamContainer from "./teamContainer";
 
 interface Product {
   id: string;
@@ -20,6 +21,7 @@ const Dashboard = async () => {
     redirect("/login");
   }
 
+  console.log(session, "SESSSIIIOOOOOOOOON");
   return (
     <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col mainnew max-md:pt-40">
       <h1 className="text-prisma-blue text-center text-5xl font-semibold mb-12">
@@ -70,7 +72,7 @@ const Dashboard = async () => {
           <CompanyContainer />
         </TabsContent>
         <TabsContent value="team">
-          <p>Time</p>
+          <TeamContainer />
         </TabsContent>
       </Tabs>
     </main>
