@@ -8,6 +8,14 @@ const Contact = async () => {
   const mainPhone = company?.mainPhone;
   const onlyNumbers = mainPhone?.replace(/\D/g, "");
 
+  const formatPhoneNumberShow = (phone: string | undefined) => {
+    if (phone?.includes("_")) {
+      return phone.replace(/[_-]/g, "").replace(/(\d{4})(\d{4})$/, "$1-$2");
+    }
+
+    return phone;
+  };
+
   return (
     <section className="bg-prisma-blue mt-24" id="contato">
       <div className="max-w-screen-xl mx-auto px-4 py-24 flex justify-around max-md:py-12 max-md:flex-col max-md:gap-y-12">
@@ -79,7 +87,7 @@ const Contact = async () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              {company?.mainPhone}
+              {formatPhoneNumberShow(company?.mainPhone)}
               {/* (43) 8481-7211 */}
             </Link>
             <Link

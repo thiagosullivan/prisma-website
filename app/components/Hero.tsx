@@ -4,6 +4,13 @@ import { db } from "@/lib/db";
 
 const Hero = async () => {
   const company = await db.company.findFirst();
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (!phoneNumber) return "";
+
+    return phoneNumber.replace(/\D/g, "");
+  };
+
+  const formattedmainPhone = formatPhoneNumber(company?.mainPhone || "");
 
   return (
     <section className="bg-hero-img bg-no-repeat bg-cover py-44">
@@ -18,7 +25,7 @@ const Hero = async () => {
             <span className="text-prisma-orange">revestimento</span>.
           </h2>
           <Link
-            href={`https://wa.me/55${company?.mainPhone}`}
+            href={`https://wa.me/55${formattedmainPhone}`}
             rel="noopener noreferrer"
             target="_blank"
             className="bg-prisma-orange px-6 py-4 inline-flex items-center gap-x-2 mt-9 hover:bg-prisma-orange-hover duration-100 text-[#FFFFFF]"
@@ -26,7 +33,7 @@ const Hero = async () => {
             <FaWhatsapp className="text-base" />
             <p className="font-light">Whatsapp</p>
           </Link>
-          <p>554384817211</p>
+          {/* <p>554384817211</p> */}
         </div>
       </div>
     </section>
