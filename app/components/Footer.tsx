@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { db } from "@/lib/db";
 import { BsTwitterX } from "react-icons/bs";
+import RedirectToHome from "./redirectToHome";
 
 const Footer = async () => {
   const company = await db.company.findFirst();
@@ -48,9 +49,14 @@ const Footer = async () => {
     <footer className="shadownew">
       <div className="max-w-screen-xl mx-auto px-4 py-14 flex justify-between max-md:flex-col max-md:items-center max-md:gap-y-10">
         <div className="max-w-[300px] max-lg:max-w-[250px]">
-          <Link href="/">
+          <RedirectToHome
+            PrismaLogo={FooterImg}
+            widthNumber={215}
+            heightNumber={50}
+          />
+          {/* <Link href="/">
             <Image src={FooterImg} alt="Prisma Logo" width={215} height={50} />
-          </Link>
+          </Link> */}
           <p className="text-prisma-blue text-xs mt-5 text-justify">
             Prisma, excelência em acessórios plásticos para construção,
             destaca-se pelos Niveladores de Piso que unem qualidade, rapidez e

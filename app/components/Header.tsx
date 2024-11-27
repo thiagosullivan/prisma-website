@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { FaLinkedin } from "react-icons/fa6";
 import SignOutBtn from "./signOutBtn";
+import RedirectToHome from "./redirectToHome";
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
@@ -114,14 +115,20 @@ const Header = async () => {
       <div className="max-md:hidden">
         <div className="bg-prisma-gray py-5 px-4 shadownew">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-            <Link href="/">
+            {/* <Link href="/">
+              OLD
               <Image
                 src={PrismaLogo}
                 alt="Prisma Logo"
                 width={200}
                 height={50}
               />
-            </Link>
+            </Link> */}
+            <RedirectToHome
+              PrismaLogo={PrismaLogo}
+              widthNumber={200}
+              heightNumber={50}
+            />
             <nav>
               <ul className="flex gap-x-8 max-lg:gap-x-5 text-prisma-blue font-semibold text-base">
                 <li>
