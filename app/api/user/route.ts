@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
+import { NextResponse } from "next/server";
 import * as z from "zod";
 
 const userSchema = z.object({

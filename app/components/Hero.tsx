@@ -1,6 +1,6 @@
+import { db } from "@/lib/db";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
-import { db } from "@/lib/db";
 
 const Hero = async () => {
   const company = await db.company.findFirst();

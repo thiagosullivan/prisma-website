@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { Company } from "@prisma/client";
+import { useEffect, useState } from "react";
 import CompanyForm from "./companyForm";
-import CompanyList from "./companyList";
 
 const CompanyContainer = () => {
   const [company, setCompany] = useState<Company[]>([]);

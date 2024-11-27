@@ -5,37 +5,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import TeamImg from "@/public/team-img.jpg";
 import { db } from "@/lib/db";
+import Image from "next/image";
 
 const Team = async () => {
   const teamWorkers = await db.team.findMany();
   console.log(teamWorkers, "TEAM WORKERS");
-
-  const imagesCarousel = () => {
-    teamWorkers.map((worker) => {
-      return (
-        <CarouselItem
-          key={worker.id}
-          className="md:basis-1/1 lg:basis-1/2 max-w-[250px] w-full border border-prisma-orange p-2"
-        >
-          <div className="w-[235px] h-[190px] relative">
-            <Image
-              src={worker.workerImg}
-              alt="Funcionário"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <p className="text-prisma-orange mt-6">{worker.workerRole}</p>
-          <h4 className="text-prisma-gray text-2xl font-semibold mt-4">
-            {worker.workerName}
-          </h4>
-        </CarouselItem>
-      );
-    });
-  };
 
   return (
     <>

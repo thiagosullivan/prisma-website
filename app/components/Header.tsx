@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
+import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -10,9 +11,8 @@ import PrismaLogo from "@/public/prisma-logo-small.png";
 import { Menu } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { FaLinkedin } from "react-icons/fa6";
-import SignOutBtn from "./signOutBtn";
 import RedirectToHome from "./redirectToHome";
-import { Separator } from "@/components/ui/separator";
+import SignOutBtn from "./signOutBtn";
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
@@ -173,7 +173,7 @@ const Header = async () => {
               </div>
             ) : (
               <Link
-                href="https://wa.me/554384817211"
+                href={`https://wa.me/55${formattedmainPhone}`}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="bg-prisma-orange text-[#FFFFFF] text-center text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100 max-lg:px-3 max-lg:py-2"
@@ -246,7 +246,7 @@ const Header = async () => {
               </li>
             </ul>
             <Link
-              href="https://wa.me/554384817211"
+              href={`https://wa.me/55${formattedmainPhone}`}
               rel="noopener noreferrer"
               target="_blank"
               className="bg-prisma-orange text-[#FFFFFF] text-center text-base px-6 py-4 hover:bg-prisma-orange-hover duration-100 m-auto block mb-12"

@@ -1,7 +1,6 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
-import { redirect, useRouter } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation";
 
 interface RedirectProps {
   PrismaLogo: StaticImageData;

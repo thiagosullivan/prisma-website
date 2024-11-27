@@ -6,13 +6,6 @@ import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
 
-// interface Service {
-//   id: string;
-//   title: string;
-//   content: string;
-//   imageUrl: string;
-// }
-
 interface ServiceListProps {
   services: Service[];
   setServices: React.Dispatch<React.SetStateAction<Service[]>>;

@@ -1,6 +1,5 @@
-import Image from "next/image";
-import ServicesImg from "@/public/services.jpg";
 import { db } from "@/lib/db";
+import Image from "next/image";
 
 const Services = async () => {
   const services = await db.service.findMany({
@@ -26,7 +25,7 @@ const Services = async () => {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-12 justify-center justify-items-center mt-24 max-lg:grid-cols-2 max-sm:grid-cols-1">
-          {services.slice(0, 3).map((service) => {
+          {services.map((service) => {
             return (
               <div
                 className="max-w-[300px] flex flex-col items-center max-sm:max-w-[100%]"

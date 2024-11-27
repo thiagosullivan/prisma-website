@@ -12,15 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import imageCompression from "browser-image-compression";
-import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
@@ -28,10 +19,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import InputMask from "react-input-mask";
-import { useRouter } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import imageCompression from "browser-image-compression";
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import InputMask from "react-input-mask";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const formSchema = z.object({
   id: z.string(),
@@ -298,7 +298,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
         toast.success("Dados salvos com sucesso!");
         form.reset();
         setPreview(null); // Remove pré-visualização
-        // router.refresh();
+        router.refresh();
       } else {
         throw new Error("Erro ao salvar dados da empresa.");
       }

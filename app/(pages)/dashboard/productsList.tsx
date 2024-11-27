@@ -1,20 +1,10 @@
 "use client";
 
-import { db } from "@/lib/db";
 import { Product } from "@prisma/client";
 import { X } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { toast } from "sonner";
-
-// interface Product {
-//   id: string;
-//   title: string;
-//   content: string;
-//   imageUrl: string;
-//   createdAt: string;
-//   updatedAt: string;
-// }
 
 interface ProductListProps {
   products: Product[];

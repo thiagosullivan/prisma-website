@@ -1,12 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
+import { db } from "@/lib/db";
 import FooterImg from "@/public/prisma-logo-small.png";
+import Link from "next/link";
+import { BsTwitterX } from "react-icons/bs";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
-import { useState } from "react";
-import { toast } from "sonner";
-import { db } from "@/lib/db";
-import { BsTwitterX } from "react-icons/bs";
 import RedirectToHome from "./redirectToHome";
 
 const Footer = async () => {

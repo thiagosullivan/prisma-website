@@ -1,21 +1,21 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
+  Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
-  Form,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import * as z from "zod";
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),

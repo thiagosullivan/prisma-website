@@ -1,35 +1,9 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { db } from "@/lib/db";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const Sobre = async () => {
   const company = await db.company.findFirst();
   console.log(company?.companyStoryImg, "STORY IMAGE");
-  //   const [loading, setLoading] = useState<boolean>(false);
-  //   const [company, setCompany] = useState();
-
-  //   console.log(company?.companyStoryImg, "COMPANY");
-
-  //   const fetchCompany = async () => {
-  //     try {
-  //       const response = await fetch("/api/company");
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setCompany(data.company);
-  //       } else {
-  //         console.error("Erro ao buscar empresa");
-  //       }
-  //     } catch (error) {
-  //       console.error("Erro na requisição:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchCompany();
-  //   }, []);
 
   return (
     <main className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col justify-center mainnew max-md:pt-40">

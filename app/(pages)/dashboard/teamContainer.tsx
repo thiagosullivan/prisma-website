@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Team } from "@prisma/client";
-import CompanyForm from "./companyForm";
-import CompanyList from "./companyList";
 import TeamForm from "@/app/components/forms/teamForm";
-import { useSession } from "next-auth/react";
-import { useCookies } from "next-client-cookies";
+import { Team } from "@prisma/client";
+import { useEffect, useState } from "react";
 import TeamList from "./teamList";
 
 const TeamContainer = () => {
