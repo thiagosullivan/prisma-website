@@ -153,10 +153,6 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
 
         if (data) {
           // Ajuste de valores, se necessário, para formatar
-          const formattedData = {
-            ...data,
-          };
-
           setInitialData(data.company);
           form.reset(data.company); // Atualiza os valores do formulário
         }
@@ -290,15 +286,23 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
       });
 
       if (response.ok) {
+        const updatedData = {
+          ...initialData,
+          ...values,
+        };
+        setInitialData(updatedData);
+        reset(updatedData);
+
+        toast.success("Dados salvos com sucesso!");
+        setPreview(null); // Remove pré-visualização
         if (fileInputRef.current) {
           fileInputRef.current.value = ""; // Limpa o input de arquivo
         }
-        console.log("Dados salvos com sucesso!");
         fetchCompany();
-        toast.success("Dados salvos com sucesso!");
-        form.reset();
-        setPreview(null); // Remove pré-visualização
         router.refresh();
+
+        // console.log("Dados salvos com sucesso!");
+        // form.reset();
       } else {
         throw new Error("Erro ao salvar dados da empresa.");
       }
@@ -307,6 +311,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
       toast.error("Alguma coisa deu errado.");
     } finally {
       setLoading(false);
+      // router.refresh();
     }
   };
 
@@ -327,8 +332,8 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
   // );
   if (loading) {
     return (
-      <div>
-        <p>loading...</p>
+      <div className="mt-12 text-xl">
+        <p>Carregando...</p>
       </div>
     );
   }
