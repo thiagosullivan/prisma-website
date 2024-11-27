@@ -21,12 +21,13 @@ const Header = async () => {
   const formatPhoneNumber = (phoneNumber: string) => {
     if (!phoneNumber) return ""; // Caso o número seja null ou undefined
 
-    return phoneNumber.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3");
+    return phoneNumber.replace(/\D/g, "");
   };
 
   const formattedmainPhone = formatPhoneNumber(company?.mainPhone || "");
+  console.log(formattedmainPhone, "formatado");
   const formattedSecondPhone = formatPhoneNumber(company?.secondPhone || "");
-  const formattedThirdPhone = formatPhoneNumber(company?.ThirdPhone || "");
+  const formattedThirdPhone = formatPhoneNumber(company?.thirdPhone || "");
 
   return (
     <header className="max-md:fixed w-full bg-prisma-gray z-50">
@@ -36,12 +37,12 @@ const Header = async () => {
             <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
               <FaWhatsapp className="text-xl" />
               <Link
-                href={`https://wa.me/55${company?.mainPhone}`}
+                href={`https://wa.me/55${formattedmainPhone}`}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="text-sm"
               >
-                {formattedmainPhone}
+                {company?.mainPhone}
                 {/* (43) 8481-7211 */}
               </Link>
             </div>
@@ -49,12 +50,12 @@ const Header = async () => {
               <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
                 <FaWhatsapp className="text-xl" />
                 <Link
-                  href={`https://wa.me/55${company?.secondPhone}`}
+                  href={`https://wa.me/55${formattedmainPhone}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className="text-sm"
                 >
-                  {formattedSecondPhone}
+                  {company?.secondPhone}
                 </Link>
               </div>
             )}
@@ -62,12 +63,12 @@ const Header = async () => {
               <div className="flex gap-x-1 hover:brightness-75 text-[#FFFFFF]">
                 <FaWhatsapp className="text-xl" />
                 <Link
-                  href={`https://wa.me/55${company?.ThirdPhone}`}
+                  href={`https://wa.me/55${formattedmainPhone}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className="text-sm"
                 >
-                  {formattedThirdPhone}
+                  {company?.thirdPhone}
                 </Link>
               </div>
             )}
@@ -81,7 +82,8 @@ const Header = async () => {
                 target="_blank"
                 className="text-sm"
               >
-                revestimentoprisma@gmail.com{" "}
+                {/* revestimentoprisma@gmail.com{" "} */}
+                {company?.mainEmail}
               </Link>
             </div>
             {company?.secondEmail != "" && (
