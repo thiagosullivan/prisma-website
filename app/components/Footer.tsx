@@ -83,7 +83,7 @@ const Footer = async () => {
             </Link>
             <Link
               // href="https://www.linkedin.com/"
-              href={`${company?.linkedinLink}`}
+              href={`${company?.twitterLink}`}
               rel="noopener noreferrer"
               target="_blank"
             >
