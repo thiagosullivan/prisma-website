@@ -5,13 +5,6 @@ import { IoIosPin, IoMdMail } from "react-icons/io";
 
 const Contact = async () => {
   const company = await db.company.findFirst();
-
-  const workinHoursThree = company?.workinHoursThree;
-  const match = workinHoursThree?.match(/^(.*?)\s*\((.*?)\)$/);
-
-  const dayRange = match?.[1] || "";
-  const details = match?.[2] || "";
-
   const mainPhone = company?.mainPhone;
   const onlyNumbers = mainPhone?.replace(/\D/g, "");
 
@@ -25,11 +18,14 @@ const Contact = async () => {
               Nossa Localização
             </h4>
             <p className="text-[#AAAAAA] max-w-[200px] mx-auto">
-              {company?.address}
+              {/* {company?.address} */}
+              {company?.streetAddress}, {company?.numberAddress}, <br />
+              {company?.cityAddress}, {company?.stateAddress} -{" "}
+              {company?.zipcodeAddress}
             </p>
             <Link
               className="text-prisma-orange hover:text-prisma-orange-hover"
-              href="https://g.co/kgs/LRAQckM"
+              href={`${company?.googleMapsAddress}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -44,24 +40,22 @@ const Contact = async () => {
               Horário de Atendimento
             </h4>
             <div className="text-[#AAAAAA]">
-              {company?.workinHoursOne} <br />
-              {company?.workinHoursTwo} <br />
-              {company?.workinHoursThree && (
-                <div className="flex items-center justify-center gap-x-2">
-                  {(() => {
-                    const match =
-                      company.workinHoursThree.match(/^(.*?)\s*\((.*?)\)$/);
-                    const dayRange = match?.[1] || "";
-                    const details = match?.[2] || "";
-                    return (
-                      <>
-                        <p>{dayRange}</p>
-                        <p className="text-prisma-orange"> ({details})</p>
-                      </>
-                    );
-                  })()}
-                </div>
-              )}
+              <p>
+                {company?.workinHoursDayOne} ({company?.workinHoursOpenOne}{" "}
+                <span> - </span>
+                {company?.workinHoursCloseOne})
+              </p>
+              <p>
+                {company?.workinHoursDayTwo} ({company?.workinHoursOpenTwo}{" "}
+                <span> - </span>
+                {company?.workinHoursCloseTwo})
+              </p>
+              <p>
+                {company?.workinHoursDayThree}{" "}
+                <span className="text-prisma-orange">
+                  ({company?.workinHoursCloseThree})
+                </span>
+              </p>
             </div>
           </div>
         </div>
