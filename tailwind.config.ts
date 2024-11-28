@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,10 +52,10 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        'prisma-blue': '#011935',
-        'prisma-gray': '#F4F5F7',
-        'prisma-orange': '#F26223',
-        'prisma-orange-hover': '#DE5214'
+        "prisma-blue": "#011935",
+        "prisma-gray": "#F4F5F7",
+        "prisma-orange": "#F26223",
+        "prisma-orange-hover": "#DE5214",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,11 +80,11 @@ const config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        'hero-img': "url('/hero-img.jpg')",
+        "hero-img": "url('/hero-img.jpg')",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+} satisfies Config;
 
-export default config
+export default config;

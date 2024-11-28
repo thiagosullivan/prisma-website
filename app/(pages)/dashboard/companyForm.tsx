@@ -32,6 +32,9 @@ import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { toast } from "sonner";
 import { z } from "zod";
+import MdEditor from "react-markdown-editor-lite";
+import "react-markdown-editor-lite/lib/index.css";
+import MarkdownIt from "markdown-it";
 
 const formSchema = z.object({
   id: z.string(),
@@ -106,6 +109,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
     typeof formSchema
   > | null>(null);
   const router = useRouter();
+  const mdParser = new MarkdownIt();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -836,7 +840,7 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
             Informações da empresa
           </h3>
           <div>
-            <FormField
+            {/* <FormField
               control={form.control}
               name="companyStory"
               render={({ field }) => (
@@ -847,6 +851,25 @@ const CompanyForm: React.FC<AddCompanyProps> = ({ fetchCompany }) => {
                       placeholder="História da Prisma"
                       className="resize-none"
                       {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+            <FormField
+              control={form.control}
+              name="companyStory"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>História da Prisma</FormLabel>
+                  <FormControl>
+                    <MdEditor
+                      style={{ height: "300px" }}
+                      renderHTML={(text) => mdParser.render(text)} // Renderiza o Markdown
+                      value={field.value} // Define o valor atual do campo no form
+                      onChange={({ text }) => field.onChange(text)} // Atualiza o estado do form
+                      placeholder="Escreva a história da Prisma aqui..."
                     />
                   </FormControl>
                   <FormMessage />
