@@ -2,12 +2,20 @@ import { db } from "@/lib/db";
 import FooterImg from "@/public/prisma-logo-small.png";
 import Link from "next/link";
 import { BsTwitterX } from "react-icons/bs";
-import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
+import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import RedirectToHome from "./redirectToHome";
 
 const Footer = async () => {
   const company = await db.company.findFirst();
+
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (!phoneNumber) return "";
+
+    return phoneNumber.replace(/\D/g, "");
+  };
+
+  const formattedmainPhone = formatPhoneNumber(company?.mainPhone || "");
 
   // const [nome, setNome] = useState("");
   // const [email, setEmail] = useState("");
@@ -51,47 +59,58 @@ const Footer = async () => {
             widthNumber={215}
             heightNumber={50}
           />
-          {/* <Link href="/">
-            <Image src={FooterImg} alt="Prisma Logo" width={215} height={50} />
-          </Link> */}
           <p className="text-prisma-blue text-xs mt-5 text-justify">
             Prisma, excelência em acessórios plásticos para construção,
             destaca-se pelos Niveladores de Piso que unem qualidade, rapidez e
             confiança.
           </p>
-
           <div className="mt-16 flex gap-x-5 max-md:justify-center">
-            <Link
-              href={`${company?.facebookLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaFacebookSquare className="text-3xl hover:text-prisma-orange-hover duration-100" />
-            </Link>
-            <Link
-              // href="https://www.instagram.com/revestimentoprisma/"
-              href={`${company?.instagramLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaInstagram className="text-3xl hover:text-prisma-orange-hover duration-100" />
-            </Link>
-            <Link
-              // href="https://www.linkedin.com/"
-              href={`${company?.linkedinLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaLinkedin className="text-3xl hover:text-prisma-orange-hover duration-100" />
-            </Link>
-            <Link
-              // href="https://www.linkedin.com/"
-              href={`${company?.twitterLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <BsTwitterX className="text-3xl hover:text-prisma-orange-hover duration-100" />
-            </Link>
+            {company?.facebookLink != "" && (
+              <Link
+                href={`${company?.facebookLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaFacebookSquare className="text-3xl hover:text-prisma-orange-hover duration-100" />
+              </Link>
+            )}
+            {company?.instagramLink != "" && (
+              <Link
+                // href="https://www.instagram.com/revestimentoprisma/"
+                href={`${company?.instagramLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaInstagram className="text-3xl hover:text-prisma-orange-hover duration-100" />
+              </Link>
+            )}
+            {company?.mainPhone != "" && (
+              <Link
+                href={`https://wa.me/55${formattedmainPhone}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaWhatsapp className="text-3xl hover:text-prisma-orange-hover duration-100" />
+              </Link>
+            )}
+            {company?.linkedinLink != "" && (
+              <Link
+                href={`${company?.linkedinLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaLinkedin className="text-3xl hover:text-prisma-orange-hover duration-100" />
+              </Link>
+            )}
+            {company?.twitterLink != "" && (
+              <Link
+                href={`${company?.twitterLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <BsTwitterX className="text-3xl hover:text-prisma-orange-hover duration-100" />
+              </Link>
+            )}
           </div>
         </div>
         <nav className="text-prisma-blue">
